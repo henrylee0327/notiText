@@ -5,6 +5,10 @@ Promises is a simple reminder app. You will be asked to put who, where, when inf
 [React.js]:https://reactjs.org
 [Redux]:https://redux.js.org
 
+## How to Use
+
+# Screenshots of the App here
+
 ## Project Requirements
 
 - You must use [React.js] and [Redux] in order to manage the state of a frontend application.
