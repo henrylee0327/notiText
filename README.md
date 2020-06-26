@@ -17,3 +17,4 @@ Promises is an app for people who forget all the time! Use this App and get SMS 
 </ul>
 
 <p>Utilized Twilio API for sending Text messages 30 minutes prior to your event.</p>
+<hr/>
