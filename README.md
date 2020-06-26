@@ -4,7 +4,7 @@ Promises is an app for people who forget all the time! Use this App and get SMS 
 
 <h3>Project Requirements</h3>
 <ul>
-    <li>You must use <a href="reactjs.org">React.js</a> and <a href="reduxjs.org">Redux</a> in order to manage the state of a frontend application.</li>
+    <li>You must use <a href="www.reactjs.org">React.js</a> and <a href="www.reduxjs.org">Redux</a> in order to manage the state of a frontend application.</li>
 </ul>
 
 
