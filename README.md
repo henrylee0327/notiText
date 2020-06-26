@@ -1,15 +1,15 @@
-<h1>Promises</h1>
+# Promises
 
-Promises is an app for people who forget all the time! Use this App and get SMS notification 30 minutes prior to your meetings, dates, and etc.....
+Promises is a simple reminder app. You will be asked to put who, where, when information for your promises. The App will text you 30 minutes or 1 hour (You will get to choose) before the event.
 
 <h3>Project Requirements</h3>
 <ul>
     <li>You must use <a href="https://reactjs.org">React.js</a> and <a href="https://reduxjs.org">Redux</a> in order to manage the state of a frontend application.</li>
     <li>Your application must contain at least 6 React components.</li>
-    <li>Organize components into separate files and import / export using es6 modules.</li>
+    <li>Organize components into separate files and `import` / `export` using es6 modules.</li>
     <li>You must have at least 5 separate Redux action types.</li>
-    <li>At least one component must use local state and not participate in the Redux state management</li>
-    <li>At least one component must use a <a href="https://https://reactjs.org/docs/react-component.html#componentdidmount">lifecycle method</a> like componentDidMount, componentWillUnmount, etc.</li>
+    <li>At least one component must use local `state` and not participate in the Redux state management</li>
+    <li>At least one component must use a <a href="https://https://reactjs.org/docs/react-component.html#componentdidmount">lifecycle method</a> like `componentDidMount`, `componentWillUnmount`, etc.</li>
 </ul>
 
 
