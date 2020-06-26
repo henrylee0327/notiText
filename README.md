@@ -16,7 +16,7 @@ Promises is a simple reminder app. You will be asked to put who, where, when inf
 - Organize components into separate files and `import` / `export` using es6 modules.
 - You must have at least 5 separate Redux action types.
 - At least one component must use local `state` and not participate in the Redux state management
-- At least one component must use a [lifecycle method] (https://https://reactjs.org/docs/react-component.html#componentdidmount) like `componentDidMount`, `componentWillUnmount`, etc.
+- At least one component must use a [lifecycle method](https://https://reactjs.org/docs/react-component.html#componentdidmount) like `componentDidMount`, `componentWillUnmount`, etc.
 
 
 ## Technologies used
