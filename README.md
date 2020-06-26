@@ -2,6 +2,11 @@
 
 Promises is an app for people who forget all the time! Use this App and get SMS notification 30 minutes prior to your meetings, dates, and etc.....
 
+<h3>Project Requirements</h3>
+<ul>1</ul>
+<ul>2</ul>
+<ul>3</ul>
+
 <h3>Front-end</h3>
 <ul>
     <li>Redux</li>
