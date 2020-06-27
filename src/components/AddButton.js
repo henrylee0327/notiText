@@ -3,7 +3,7 @@ import React from 'react';
 function AddButton () {
   return (
     <>
-      <button className="button is-success is-rounded is-centered">Rounded</button>
+      <button className="button is-link is-rounded is-centered is-large">Submit</button>
     </>
   )
 }
