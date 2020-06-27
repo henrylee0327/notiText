@@ -13,7 +13,7 @@ function App() {
           Promises
         </h1>
         <h2 className="subtitle">
-          We will send you a text message so that you don't forget your promises `&#128526;
+          We will send you a text message so that you don't forget your promises &#128526;
         </h2>
       </div>
     </div>
