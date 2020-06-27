@@ -1,4 +1,9 @@
 import React from 'react';
+import PromiseContent from './promise-components/PromiseContent'
+import PromiseWhen from './promise-components/PromiseWhen'
+import PromiseWhere from './promise-components/PromiseWhere'
+import PhoneNumber from './promise-components/PhoneNumber'
+
 
 function YourPromises () {
   return (
@@ -6,25 +11,29 @@ function YourPromises () {
     <div className="tile is-ancestor">
       <div className="tile is-parent">
         <article className="tile is-child box">
-          <p className="title">Hello World</p>
-          <p className="subtitle">What is up?</p>
+          <PromiseContent />
+          
         </article>
-    </div>
+      </div>
+      <div className="tile is-parent">
+        <article className="tile is-child box">
+          <PromiseWhen />
+         
+        </article>
+      </div>
     <div className="tile is-parent">
       <article className="tile is-child box">
-        <p className="title">Foo</p>
-        <p className="subtitle">Bar</p>
+          <PromiseWhere />
+        
+        
       </article>
     </div>
     <div className="tile is-parent">
-      <article className="tile is-child box">
-        <p className="title">Third column</p>
-        <p className="subtitle">With some content</p>
-        <div className="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-        </div>
-      </article>
-    </div>
+        <article className="tile is-child box">
+          <PhoneNumber />
+          
+        </article>
+      </div>
   </div>
 </>
   )
