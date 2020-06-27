@@ -4,9 +4,9 @@ function PhoneNumber () {
     return (
           <>
           <p className="title">Enter your Phone number to receive a notification</p>
-          <div class="field">
-            <div class="control">
-                <input class="input is-danger" type="tel" placeholder="Enter your phone number here"></input>
+          <div className="field">
+            <div className="control">
+                <input className="input is-danger" type="tel" placeholder="Enter your phone number here"></input>
             </div>
           </div>
           </>
