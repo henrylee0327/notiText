@@ -6,8 +6,12 @@ import PhoneNumber from './promise-components/PhoneNumber';
 
 
 
-function YourPromises () {
+function YourPromises (props) {
   const [promise, setPromise] = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+  const [place, setPlace] = useState('')
+  const [phone, setPhone] = useState('')
 
   return (
     <>
@@ -19,17 +23,17 @@ function YourPromises () {
       </div>
       <div className="tile is-parent">
         <article className="tile is-child box">
-          <PromiseWhen />
+          <PromiseWhen date={date} setDate={setDate} time={time} setTime={setTime}/>
         </article>
       </div>
     <div className="tile is-parent">
       <article className="tile is-child box">
-          <PromiseWhere />
+          <PromiseWhere place={place} setPlace={setPlace} />
       </article>
     </div>
     <div className="tile is-parent">
         <article className="tile is-child box">
-          <PhoneNumber />
+          <PhoneNumber phone={phone} setPhone={setPhone} />
         </article>
       </div>
   </div>

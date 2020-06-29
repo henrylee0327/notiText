@@ -1,9 +1,10 @@
 import React from 'react';
 
-function AddButton () {
+function AddButton (props) {
+
   return (
     <>
-      <button className="button is-link is-rounded is-centered is-large">Submit</button>
+      <button className="button is-link is-rounded is-centered is-large" >Submit</button>
     </>
   )
 }

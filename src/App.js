@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import YourPromises from './components/YourPromises'
 import AddButton from './components/AddButton'
 
 function App() {
+  const [submit, setSubmit] = useState(false)
+
+  function handleSubmit (e) {
+    e.preventDefault()
+    setSubmit(true)
+  }
+
   return (
   <>
   <section className="hero is-primary">
@@ -18,6 +25,7 @@ function App() {
       </div>
     </div>
   </section>
+  <form onSubmit={handleSubmit}>
   <section className="main-body">
     <div className="inputs">
     <br></br><br></br>
@@ -28,6 +36,7 @@ function App() {
     <AddButton />
     </div>
   </section>
+  </form>
   </>
   )}
 
