@@ -15,9 +15,7 @@ function YourPromises (props) {
   const [submit, setSubmit] = useState(false)
   const [isValid, setIsValid] = useState(false)
 
-  function formValidate (input) {
-    // const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-    let phoneno = /^\d{10}$/
+  function phoneValidate () {
     if (phone === "") {
       alert("Enter your phone number")
       return false
@@ -25,7 +23,7 @@ function YourPromises (props) {
       alert("Enter 10 digits of phone number")
       return false
     } else if (typeof phone === "string") {
-      alert("It has to be a number" )
+      alert("Phone number has to be numbers" )
       return false
     } else {
       return true
@@ -34,9 +32,9 @@ function YourPromises (props) {
 
   function handleSubmit (e) {
     e.preventDefault()
-    if (formValidate() === true) {
+    if (phoneValidate() === true) {
       return setSubmit(true)
-    } else if (formValidate() === false) {
+    } else {
       return setIsValid(false)
     }
     console.log("Button clicked")
