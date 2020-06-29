@@ -1,10 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function PhoneNumber (props) {
+    // const [phoneInput, setPhoneInput] = useState("")
+
+    // function phoneValid (phoneInput) {
+    //     let phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+
+    //     if (phoneInput.value.match(phoneno)) {
+    //         return true
+    //     } else {
+    //         alert("Not a valid phone number")
+    //         return false
+    //     }
+    // }
 
     function handlePhone (e) {
-        console.log(e.currentTarget.value)
         props.setPhone(e.currentTarget.value)
+        console.log(e.currentTarget.value)
     }
 
     return (

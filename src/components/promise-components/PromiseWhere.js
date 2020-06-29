@@ -3,7 +3,8 @@ import React from 'react'
 function PromiseWhere (props) {
 
     function handlePlace (e) {
-        props.setPlace()
+        props.setPlace(e.currentTarget.value)
+        console.log(e.currentTarget.value)
     }
 
     return (

@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import YourPromises from './components/YourPromises'
-import AddButton from './components/AddButton'
+// import AddButton from './components/AddButton'
+// import PromiseContent from './components/promise-components/PromiseContent';
+// import PromiseWhen from './components/promise-components/PromiseWhen';
+// import PromiseWhere from './components/promise-components/PromiseWhere';
+// import PhoneNumber from './components/promise-components/PhoneNumber';
+
+
+// function NextPage () {
+//   return (
+//     <div>
+//       Next Page content here 
+//     </div>
+//   )
+// }
+
 
 function App() {
-  const [submit, setSubmit] = useState(false)
-
-  function handleSubmit (e) {
-    e.preventDefault()
-    setSubmit(true)
-  }
-
   return (
   <>
-  <section className="hero is-primary">
+     <section className="hero is-primary">
     <div className="hero-body">
       <div className="container">
         <h1 className="title">
@@ -25,18 +32,7 @@ function App() {
       </div>
     </div>
   </section>
-  <form onSubmit={handleSubmit}>
-  <section className="main-body">
-    <div className="inputs">
-    <br></br><br></br>
-      <YourPromises />
-    </div>
-    <br></br><br></br>
-    <div className="add-button">
-    <AddButton />
-    </div>
-  </section>
-  </form>
+    <YourPromises />
   </>
   )}
 

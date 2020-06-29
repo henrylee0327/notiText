@@ -3,7 +3,7 @@ import PromiseContent from './promise-components/PromiseContent';
 import PromiseWhen from './promise-components/PromiseWhen';
 import PromiseWhere from './promise-components/PromiseWhere';
 import PhoneNumber from './promise-components/PhoneNumber';
-
+import AddButton from './AddButton'
 
 
 function YourPromises (props) {
@@ -12,9 +12,42 @@ function YourPromises (props) {
   const [time, setTime] = useState('')
   const [place, setPlace] = useState('')
   const [phone, setPhone] = useState('')
+  const [submit, setSubmit] = useState(false)
+  const [isValid, setIsValid] = useState(false)
 
+  function formValidate (input) {
+    // const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    let phoneno = /^\d{10}$/
+    if (phone === "") {
+      alert("Enter your phone number")
+      return false
+    } else if ((phone).length < 10){
+      alert("Enter 10 digits of phone number")
+      return false
+    } else if (typeof phone === "string") {
+      alert("It has to be a number" )
+      return false
+    } else {
+      return true
+    }
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault()
+    if (formValidate() === true) {
+      return setSubmit(true)
+    } else if (formValidate() === false) {
+      return setIsValid(false)
+    }
+    console.log("Button clicked")
+  }
+  
   return (
     <>
+  <form onSubmit={handleSubmit}>
+  <section className="main-body">
+    <div className="inputs">
+    <br></br><br></br>
     <div className="tile is-ancestor">
       <div className="tile is-parent">
         <article className="tile is-child box">
@@ -28,15 +61,22 @@ function YourPromises (props) {
       </div>
     <div className="tile is-parent">
       <article className="tile is-child box">
-          <PromiseWhere place={place} setPlace={setPlace} />
+          <PromiseWhere place={place} setPlace={setPlace}/>
       </article>
     </div>
     <div className="tile is-parent">
         <article className="tile is-child box">
-          <PhoneNumber phone={phone} setPhone={setPhone} />
+          <PhoneNumber phone={phone} setPhone={setPhone}/>
         </article>
       </div>
   </div>
+    </div>
+    <br></br><br></br>
+    <div className="add-button">
+    <AddButton />
+    </div>
+  </section>
+  </form>
 </>
   )
 }
