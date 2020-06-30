@@ -1,22 +1,10 @@
 import React from 'react'
 
 function PhoneNumber (props) {
-    // const [phoneInput, setPhoneInput] = useState("")
-
-    // function phoneValid (phoneInput) {
-    //     let phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-
-    //     if (phoneInput.value.match(phoneno)) {
-    //         return true
-    //     } else {
-    //         alert("Not a valid phone number")
-    //         return false
-    //     }
-    // }
 
     function handlePhone (e) {
         props.setPhone(e.currentTarget.value)
-        console.log(e.currentTarget.value)
+        // console.log(e.currentTarget.value)
     }
 
     return (
@@ -25,6 +13,8 @@ function PhoneNumber (props) {
           <div className="field">
             <div className="control">
                 <input className="input is-danger" value={props.phone} onChange={handlePhone} type="tel" placeholder="Enter your phone number here"></input>
+                <br></br>
+                <p>(Format: 0000000000)</p>
             </div>
           </div>
           </>
@@ -33,3 +23,5 @@ function PhoneNumber (props) {
 
 
 export default PhoneNumber;
+
+// pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"

@@ -1,12 +1,6 @@
 import React from 'react';
 import './App.css';
 import YourPromises from './components/YourPromises'
-// import AddButton from './components/AddButton'
-// import PromiseContent from './components/promise-components/PromiseContent';
-// import PromiseWhen from './components/promise-components/PromiseWhen';
-// import PromiseWhere from './components/promise-components/PromiseWhere';
-// import PhoneNumber from './components/promise-components/PhoneNumber';
-
 
 // function NextPage () {
 //   return (
