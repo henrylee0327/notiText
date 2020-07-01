@@ -4,39 +4,35 @@ import PromiseWhen from './promise-components/PromiseWhen';
 import PromiseWhere from './promise-components/PromiseWhere';
 import PhoneNumber from './promise-components/PhoneNumber';
 import AddButton from './AddButton'
-
-
-function NextPage (props) {
-  return (
-    <div>Hello this is the new page</div>
-  )
-}
+import NextPage from './NextPage'
 
 function PromiseForm (props) {
   
-  function phoneValidate () {
-    if (props.phone === "") {
-      alert("Enter your phone number")
-      return false
-    } else if ((props.phone).length < 10 || (props.phone).length > 10){
-      alert("Enter 10 digits of phone number")
-      return false
-    } else if (isNaN(props.phone)) {
-      console.log(props.phone)
-      alert("Phone number has to be numbers" )
-    } else {
-      return true
-    }
-  }
+  // function phoneValidate () {
+  //   if (props.phone === "") {
+  //     alert("Enter your phone number")
+  //     return false
+  //   } else if ((props.phone).length < 10 || (props.phone).length > 10){
+  //     alert("Enter 10 digits of phone number")
+  //     return false
+  //   } else if (isNaN(props.phone)) {
+  //     console.log(props.phone)
+  //     alert("Phone number has to be numbers")
+  //   } else {
+  //     return true
+  //   }
+  // }
+   
 
   function handleSubmit (e) {
     e.preventDefault()
-    if (phoneValidate() === true) {
-    console.log("Button clicked")
-      return props.setIsValid(true)
-    } else {
-      return props.setIsValid(false)
-    }
+    // if (phoneValidate() === true) {
+    // console.log("Button clicked")
+    //   return props.setIsValid(true)
+    // } else {
+    //   return props.setIsValid(false)
+    // }
+    props.setIsValid(true)
   }
   return (
     <>
@@ -47,7 +43,7 @@ function PromiseForm (props) {
       <div className="tile is-ancestor">
         <div className="tile is-parent">
           <article className="tile is-child box">
-            <PromiseContent promise={props.promise} setPromise={props.etPromise}/>
+            <PromiseContent promise={props.promise} setPromise={props.setPromise}/>
           </article>
         </div>
         <div className="tile is-parent">
@@ -89,7 +85,7 @@ function YourPromises (props) {
   let thePromiseForm
   const theForm =<PromiseForm promise={promise} setPromise={setPromise} date={date} setDate={setDate} time={time} setTime={setTime} place={place} setPlace={setPlace} phone={phone} setPhone={setPhone} isValid={isValid} setIsValid={setIsValid}/>
   if (isValid === true) {
-    thePromiseForm = <NextPage />
+    thePromiseForm = <NextPage promise={promise} date={date} time={time} place={place} phone={phone} isValid={isValid} />
   } else {
     thePromiseForm = theForm
   }
