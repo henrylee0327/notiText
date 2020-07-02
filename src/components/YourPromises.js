@@ -73,6 +73,7 @@ function PromiseForm (props) {
   )
 }
 
+
 function YourPromises (props) {
   const [promise, setPromise] = useState('')
   const [date, setDate] = useState('')
@@ -81,11 +82,18 @@ function YourPromises (props) {
   const [phone, setPhone] = useState('')
   // const [submit, setSubmit] = useState(false)
   const [isValid, setIsValid] = useState(false)
+  const [count, setCount] = useState(1)
+
+
+  // let arrayofNumbers = []
+  // for (let i = 1; i < count; i++) {
+  //   arrayofNumbers.push(count)
+  // }
 
   let thePromiseForm
   const theForm =<PromiseForm promise={promise} setPromise={setPromise} date={date} setDate={setDate} time={time} setTime={setTime} place={place} setPlace={setPlace} phone={phone} setPhone={setPhone} isValid={isValid} setIsValid={setIsValid}/>
   if (isValid === true) {
-    thePromiseForm = <NextPage promise={promise} date={date} time={time} place={place} phone={phone} isValid={isValid} />
+    thePromiseForm = <NextPage count={count} promise={promise} date={date} time={time} place={place} phone={phone} isValid={isValid} />
   } else {
     thePromiseForm = theForm
   }
