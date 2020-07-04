@@ -35,4 +35,3 @@ Promises is a simple reminder app. You will be asked to put who, where, when inf
 ### API
 
 - Twilio API for sending notifications SMS
-- Google map API for selecting the places when you meet up people
