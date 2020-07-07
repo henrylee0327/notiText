@@ -3,10 +3,10 @@ const createPromiseTableQuery = `
         id serial primary key,
         uuid text unique,
         content text unique, 
-        time text, 
-        date text, 
+        time time, 
+        date date, 
         place text, 
-        phone_number integer,
+        phone_number text,
         ctime timestamptz,
         mtime timestamptz default current_timestamp
         );`
