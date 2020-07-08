@@ -24,6 +24,7 @@ function connect () {
     })
 }
 
+// get a whole list of Promise query
 const getPromiseQuery = 'SELECT * FROM promise'
 
 function getPromise () {
@@ -33,9 +34,50 @@ function getPromise () {
         })
 }
 
+// get an individual promise query
+const getIndividualPromiseQuery = 'SELECT * FROM promise WHERE uuid = ?'
+
+function getIndividualPromise (uuid) {
+    return conn.raw(getIndividualPromiseQuery, uuid)
+        .then((result) => {
+            return result.rows
+        })
+}
+
+// Create a new promise query
+const createPromiseQuery = 
+`INSERT INTO promise (uuid, content, time, date, place, phone_number, ctime, mtime) 
+VALUES (?, ?, ?, ?, ?, ?, current_timestamp, current_timestamp)
+RETURNING *
+`
+
+function createPromise (uuid, content, time, date, place, phone_number) {
+    return conn.raw(createPromiseQuery, [uuid, content, time, date, place, phone_number])
+        .then((result) => {
+            return result.rows
+        })
+}
+
+// Update a promise query
+const updatePromiseQuery = 
+`UPDATE promise SET content = ?, time = ?, date = ?, place = ?, phone_number = ?, ctime = current_timestamp, mtime = current_timestamp 
+WHERE uuid = ? 
+RETURNING *;
+`
+
+function updatePromise (content, time, date, place, phone_number, uuid) {
+    return conn.raw(updatePromiseQuery, [content, time, date, place, phone_number, uuid])
+        .then((result) => {
+            return result.rows
+        })
+}
+
 // Public API
 
 module.exports = {
     connect: connect,
-    getPromise: getPromise
+    getPromise: getPromise,
+    getIndividualPromise: getIndividualPromise,
+    createPromise: createPromise,
+    updatePromise: updatePromise
 }

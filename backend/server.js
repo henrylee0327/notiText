@@ -7,14 +7,102 @@ const port = 5000;
 // Middleware
 app.use(express.static('../frontend/build'));
 app.use(express.urlencoded({extended: true}));
+app.use(express.json())
+
+
+function generateUUID () {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 
 // The homepage
 app.get('/', (req, res) => {
-    res.render('index.html')
+    res.status(200).render('index.html')
 });
 
-app.post('/promise/:uuid', (req, res) => {
+// Your promise list page
+app.get('/promises', async (req, res) => {
+    // console.log(req.params)
+    try {
+        const results = await db.getPromise()
+        console.log(results)
+        res.status(200).json({
+            promise: results
+        })
+    } catch (err) {
+        res.status(500)
+    }
+        
+})
 
+// Your promise
+app.get('/promises/:uuid', async (req, res) => {
+    console.log(req.params.uuid)
+    try {
+        const results = await db.getIndividualPromise(req.params.uuid)
+        console.log(results)
+        res.status(200).json({
+        promise: results
+    })
+    } catch (err) {
+        res.status(500)
+    }
+})
+
+
+// Create your promise
+app.post('/promises', async (req, res) => {
+    console.log(req.body.content)
+    try {
+        const theUUID = generateUUID()
+        const theContent = req.body.content
+        const theTime = req.body.time
+        const theDate = req.body.date
+        const thePlace = req.body.place
+        const thePhoneNumber = req.body.phone_number
+
+        const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber)
+        console.log(results)
+        console.log('żzzzzzzzzzzzzzzzzz')
+        console.log('~~~~~~~~~~')
+        res.status(201).json({
+            promise: results
+    })
+    } catch (err) {
+        res.status(500).send('Failed')
+    }
+    
+})
+
+// Update your promise
+app.put('/promises/:uuid', async (req, res) => {
+    console.log(req.params.uuid)
+    try {
+        const theUUID = req.params.uuid
+        const theContent = req.body.content
+        const theTime = req.body.time
+        const theDate = req.body.date
+        const thePlace = req.body.place
+        const thePhoneNumber = req.body.phone_number
+
+        const results = await db.updatePromise(theContent, theTime, theDate, thePlace, thePhoneNumber, theUUID)
+        console.log(results)
+        console.log('hhhhhhhhhhhhhhhhhhh')
+        res.status(200).json({
+            promise: results
+        })
+    } catch (err) {
+        res.send('Failed')
+    }
+})
+
+// Delete your promise
+app.delete('/promises/:uuid', (req, res) => {
+    res.status(204).json({
+        status: "Success"
+    })
 })
 
 const startExpressApp = () => {

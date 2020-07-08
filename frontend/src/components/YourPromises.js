@@ -32,11 +32,15 @@ function PromiseForm (props) {
     // } else {
     //   return props.setIsValid(false)
     // }
-    props.setIsValid(true)
+    // props.setIsValid(true)
+    fetch(`http://localhost:5000/promises/:uuid`, {
+      method: 'POST',
+      body: JSON.stringify({promise, })
+    })
   }
   return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} method="POST">
     <section className="main-body">
       <div className="inputs">
       <br></br><br></br>

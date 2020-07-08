@@ -2,7 +2,7 @@ const createPromiseTableQuery = `
     CREATE TABLE promise (
         id serial primary key,
         uuid text unique,
-        content text unique, 
+        content text, 
         time time, 
         date date, 
         place text, 
