@@ -8,6 +8,7 @@ const port = 5000;
 app.use(express.static('../frontend/build'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
+// app.use(cors()) 
 
 
 function generateUUID () {
@@ -99,11 +100,18 @@ app.put('/promises/:uuid', async (req, res) => {
 })
 
 // Delete your promise
-app.delete('/promises/:uuid', (req, res) => {
-    res.status(204).json({
-        status: "Success"
+app.delete('/promises/:uuid', async (req, res) => {
+    console.log(req.params.uuid)
+    // try {
+        const results = await db.deletePromise(req.params.uuid)
+        console.log(results)
+        res.status(204).json({
+            promise: results
+        }) 
+    // } catch (err) {
+    //     res.status(500)
+    // }
     })
-})
 
 const startExpressApp = () => {
     app.listen(port, () => {

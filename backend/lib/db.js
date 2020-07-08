@@ -72,6 +72,20 @@ function updatePromise (content, time, date, place, phone_number, uuid) {
         })
 }
 
+// Delete a promise query
+const deletePromiseQuery = 
+`
+DELETE FROM promise WHERE uuid = ?
+RETURNING *;
+`
+
+function deletePromise (uuid) {
+    return conn.raw(deletePromiseQuery, [uuid])
+        .then((result) => {
+            return result.rows
+        })
+}
+
 // Public API
 
 module.exports = {
@@ -79,5 +93,6 @@ module.exports = {
     getPromise: getPromise,
     getIndividualPromise: getIndividualPromise,
     createPromise: createPromise,
-    updatePromise: updatePromise
+    updatePromise: updatePromise,
+    deletePromise: deletePromise
 }

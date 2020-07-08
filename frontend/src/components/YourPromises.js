@@ -3,26 +3,10 @@ import PromiseContent from './promise-components/PromiseContent';
 import PromiseWhen from './promise-components/PromiseWhen';
 import PromiseWhere from './promise-components/PromiseWhere';
 import PhoneNumber from './promise-components/PhoneNumber';
-import AddButton from './AddButton'
+// import AddButton from './AddButton'
 import NextPage from './NextPage'
 
 function PromiseForm (props) {
-  
-  // function phoneValidate () {
-  //   if (props.phone === "") {
-  //     alert("Enter your phone number")
-  //     return false
-  //   } else if ((props.phone).length < 10 || (props.phone).length > 10){
-  //     alert("Enter 10 digits of phone number")
-  //     return false
-  //   } else if (isNaN(props.phone)) {
-  //     console.log(props.phone)
-  //     alert("Phone number has to be numbers")
-  //   } else {
-  //     return true
-  //   }
-  // }
-   
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -32,11 +16,7 @@ function PromiseForm (props) {
     // } else {
     //   return props.setIsValid(false)
     // }
-    // props.setIsValid(true)
-    fetch(`http://localhost:5000/promises/:uuid`, {
-      method: 'POST',
-      body: JSON.stringify({promise, })
-    })
+    props.setIsValid(true)
   }
   return (
     <>
@@ -69,7 +49,7 @@ function PromiseForm (props) {
       </div>
       <br></br><br></br>
       <div className="add-button">
-      <AddButton />
+      <button className="button is-link is-rounded is-centered is-large" >Submit</button>
       </div>
     </section>
     </form>
@@ -110,3 +90,19 @@ function YourPromises (props) {
 }
 
 export default YourPromises;
+
+ // function phoneValidate () {
+  //   if (props.phone === "") {
+  //     alert("Enter your phone number")
+  //     return false
+  //   } else if ((props.phone).length < 10 || (props.phone).length > 10){
+  //     alert("Enter 10 digits of phone number")
+  //     return false
+  //   } else if (isNaN(props.phone)) {
+  //     console.log(props.phone)
+  //     alert("Phone number has to be numbers")
+  //   } else {
+  //     return true
+  //   }
+  // }
+   

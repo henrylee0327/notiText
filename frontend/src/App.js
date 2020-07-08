@@ -2,15 +2,6 @@ import React from 'react';
 import './App.css';
 import YourPromises from './components/YourPromises'
 
-// function NextPage () {
-//   return (
-//     <div>
-//       Next Page content here 
-//     </div>
-//   )
-// }
-
-
 function App() {
   return (
   <>
