@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require('./lib/db');
 const app = express();
+const cors = require('cors')
 const port = 5000;
 
 
@@ -8,7 +9,7 @@ const port = 5000;
 app.use(express.static('../frontend/build'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
-// app.use(cors()) 
+app.use(cors()) 
 
 
 function generateUUID () {

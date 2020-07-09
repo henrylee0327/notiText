@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import './NextPage.css'
+import promiseApp from '../apis/promiseApp'
+import { PromiseContext } from '../context/PromiseContext';
 
 function NextPage (props) {
-  
+    const {context, setContext} = useContext(PromiseContext)
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await promiseApp.get("/promises")
+          console.log(response)
+          setContext(response.data.promise)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+      fetchData()
+    },[])
   return (
+    <>
+    <section className="hero is-primary">
+    <div className="hero-body">
+      <div className="container">
+        <h1 className="title"> 
+          Promises
+        </h1>
+        <h2 className="subtitle">
+          We will send you a text message so that you don't forget your promises &#128526;
+        </h2>
+      </div>
+    </div>
+  </section>
+  <br></br>
     <section>
+      {context.map((el) => {
+        return (
+          <>
         <div className="card">
           <header className="card-header">
             <p className="card-header-title">
@@ -13,16 +44,16 @@ function NextPage (props) {
           </header>
           <div className="card-content">
             <div className="content">
-              {props.promise}
+              {el.content}
             </div>
             <div className="content">
-              {props.date} at {props.time}
+              {el.date} at {el.time}
             </div>
             <div className="content">
-              {props.place}
+              {el.place}
             </div>
             <div className="content">
-              {props.phone}
+              {el.phone_number}
             </div>
           </div>
           <footer className="card-footer">
@@ -30,7 +61,13 @@ function NextPage (props) {
             <a href="#" className="card-footer-item">Delete</a>
           </footer>
         </div>
+        <br></br>
+        </>
+        )
+      })}
+        
     </section>
+    </>
   )
 }
 

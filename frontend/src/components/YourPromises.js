@@ -6,56 +6,35 @@ import PhoneNumber from './promise-components/PhoneNumber';
 // import AddButton from './AddButton'
 import NextPage from './NextPage'
 
-function PromiseForm (props) {
+// function PromiseForm (props) {
 
-  function handleSubmit (e) {
-    e.preventDefault()
-    // if (phoneValidate() === true) {
-    // console.log("Button clicked")
-    //   return props.setIsValid(true)
-    // } else {
-    //   return props.setIsValid(false)
-    // }
-    props.setIsValid(true)
-  }
-  return (
-    <>
-    <form onSubmit={handleSubmit} method="POST">
-    <section className="main-body">
-      <div className="inputs">
-      <br></br><br></br>
-      <div className="tile is-ancestor">
-        <div className="tile is-parent">
-          <article className="tile is-child box">
-            <PromiseContent promise={props.promise} setPromise={props.setPromise}/>
-          </article>
-        </div>
-        <div className="tile is-parent">
-          <article className="tile is-child box">
-            <PromiseWhen date={props.date} setDate={props.setDate} time={props.time} setTime={props.setTime}/>
-          </article>
-        </div>
-      <div className="tile is-parent">
-        <article className="tile is-child box">
-            <PromiseWhere place={props.place} setPlace={props.setPlace}/>
-        </article>
-      </div>
-      <div className="tile is-parent">
-          <article className="tile is-child box">
-            <PhoneNumber phone={props.phone} setPhone={props.setPhone}/>
-          </article>
-        </div>
-    </div>
-      </div>
-      <br></br><br></br>
-      <div className="add-button">
-      <button className="button is-link is-rounded is-centered is-large" >Submit</button>
-      </div>
-    </section>
-    </form>
-  </> 
-  )
-}
+//   const handleSubmit = async e => {
+//     e.preventDefault()
+    
+//     var promise = props.promise
+//     var date = props.date
+//     var time = props.time
+//     var place = props.place
+//     var phone = props.phone
+
+//     try {
+//       const body = { promise, date, time, place, phone }
+//       const response = await fetch("http://localhost:5000/promises", {
+//         method: "POST",
+//         headers: {"Content-Type": "application/json"},
+//         body: JSON.stringify(body)
+//       })
+//       console.log(response)
+//     } catch (err) {
+//       console.log(err)
+//     }
+//   }
+//   return (
+//     <>
+  
+//   </> 
+//   )
+// }
 
 
 function YourPromises (props) {
@@ -69,22 +48,59 @@ function YourPromises (props) {
   const [count, setCount] = useState(1)
 
 
-  // let arrayofNumbers = []
-  // for (let i = 1; i < count; i++) {
-  //   arrayofNumbers.push(count)
-  // }
-
-  let thePromiseForm
-  const theForm =<PromiseForm promise={promise} setPromise={setPromise} date={date} setDate={setDate} time={time} setTime={setTime} place={place} setPlace={setPlace} phone={phone} setPhone={setPhone} isValid={isValid} setIsValid={setIsValid}/>
-  if (isValid === true) {
-    thePromiseForm = <NextPage count={count} promise={promise} date={date} time={time} place={place} phone={phone} isValid={isValid} />
-  } else {
-    thePromiseForm = theForm
-  }
+ const handleSubmit = e => {
+   e.preventDefault()
+   setIsValid(true)
+ }
 
   return (
     <>
-    {thePromiseForm}
+     <section className="hero is-primary">
+    <div className="hero-body">
+      <div className="container">
+        <h1 className="title">
+          Promises
+        </h1>
+        <h2 className="subtitle">
+          We will send you a text message so that you don't forget your promises &#128526;
+        </h2>
+      </div>
+    </div>
+  </section>
+  <br></br>
+      <form onSubmit={handleSubmit} action="">
+    <section className="main-body">
+      <div className="inputs">
+      <br></br><br></br>
+      <div className="tile is-ancestor">
+        <div className="tile is-parent">
+          <article className="tile is-child box">
+            <PromiseContent promise={promise} setPromise={setPromise}/>
+          </article>
+        </div>
+        <div className="tile is-parent">
+          <article className="tile is-child box">
+            <PromiseWhen date={date} setDate={setDate} time={time} setTime={setTime}/>
+          </article>
+        </div>
+      <div className="tile is-parent">
+        <article className="tile is-child box">
+            <PromiseWhere place={place} setPlace={setPlace}/>
+        </article>
+      </div>
+      <div className="tile is-parent">
+          <article className="tile is-child box">
+            <PhoneNumber phone={phone} setPhone={setPhone}/>
+          </article>
+        </div>
+    </div>
+      </div>
+      <br></br><br></br>
+      <div className="add-button">
+      <button className="button is-link is-rounded is-centered is-large" >Submit</button>
+      </div>
+    </section>
+    </form>
     </>
   )
 }
@@ -105,4 +121,24 @@ export default YourPromises;
   //     return true
   //   }
   // }
+
+  // if (phoneValidate() === true) {
+    // console.log("Button clicked")
+    //   return props.setIsValid(true)
+    // } else {
+    //   return props.setIsValid(false)
+    // }
+    // props.setIsValid(true)
    
+     // let arrayofNumbers = []
+  // for (let i = 1; i < count; i++) {
+  //   arrayofNumbers.push(count)
+  // }
+
+  // let thePromiseForm
+  // const theForm =<PromiseForm promise={promise} setPromise={setPromise} date={date} setDate={setDate} time={time} setTime={setTime} place={place} setPlace={setPlace} phone={phone} setPhone={setPhone} isValid={isValid} setIsValid={setIsValid}/>
+  // if (isValid === true) {
+  //   thePromiseForm = <NextPage count={count} promise={promise} date={date} time={time} place={place} phone={phone} isValid={isValid} />
+  // } else {
+  //   thePromiseForm = theForm
+  // }
