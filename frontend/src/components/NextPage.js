@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import './NextPage.css'
 import promiseApp from '../apis/promiseApp'
 import { PromiseContext } from '../context/PromiseContext';
+import { useHistory } from "react-router-dom";
 
 function NextPage (props) {
     const {context, setContext} = useContext(PromiseContext)
@@ -31,11 +32,14 @@ function NextPage (props) {
       }
     }
 
+    let history = useHistory()
+
     const handleEdit = async (uuid) => {
       try {
         const response = await promiseApp.put(`/promises/${uuid}`)
-        console.log(response)
-        console.log('~~~~~~~~~~~~~~~~~~')
+        // console.log(response)
+        // console.log('~~~~~~~~~~~~~~~~~~')
+        history.push(`/promises/${uuid}`)
       } catch (err) {
         alert(err)
       }

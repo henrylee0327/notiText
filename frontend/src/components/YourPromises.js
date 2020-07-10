@@ -47,7 +47,7 @@ function YourPromises (props) {
 
   return (
     <>
-     <section className="hero is-primary">
+  <section className="hero is-primary">
     <div className="hero-body">
       <div className="container">
         <h1 className="title">
@@ -60,8 +60,8 @@ function YourPromises (props) {
     </div>
   </section>
   <br></br>
-      <form onSubmit={handleSubmit} action="/promises">
-    <section className="main-body">
+  <form onSubmit={handleSubmit}>
+  <section className="main-body">
       <div className="inputs">
       <br></br><br></br>
       <div className="tile is-ancestor">
@@ -91,8 +91,8 @@ function YourPromises (props) {
       <div className="add-button">
       <button className="button is-link is-rounded is-centered is-large" >Submit</button>
       </div>
-    </section>
-    </form>
+  </section>
+  </form>
     </>
   )
 }
