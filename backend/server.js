@@ -40,18 +40,18 @@ app.get('/promises', async (req, res) => {
 })
 
 // Your promise
-app.get('/promises/:uuid', async (req, res) => {
-    console.log(req.params.uuid)
-    try {
-        const results = await db.getIndividualPromise(req.params.uuid)
-        console.log(results)
-        res.status(200).json({
-        promise: results
-    })
-    } catch (err) {
-        res.status(500)
-    }
-})
+// app.get('/promises/:uuid', async (req, res) => {
+//     console.log(req.params.uuid)
+//     try {
+//         const results = await db.getIndividualPromise(req.params.uuid)
+//         console.log(results)
+//         res.status(200).json({
+//         promise: results
+//     })
+//     } catch (err) {
+//         res.status(500)
+//     }
+// })
 
 
 // Create your promise
@@ -69,13 +69,13 @@ app.post('/promises', async (req, res) => {
         console.log(results)
         console.log('żzzzzzzzzzzzzzzzzz')
         console.log('~~~~~~~~~~')
-        res.status(201).json({
-            promise: results
-    })
+    //     res.status(201).json({
+    //         promise: results
+    // })
+        res.redirect(302, `/promises`)
     } catch (err) {
         res.status(500).send('Failed')
     }
-    
 })
 
 // Update your promise
@@ -103,15 +103,15 @@ app.put('/promises/:uuid', async (req, res) => {
 // Delete your promise
 app.delete('/promises/:uuid', async (req, res) => {
     console.log(req.params.uuid)
-    // try {
+    try {
         const results = await db.deletePromise(req.params.uuid)
         console.log(results)
         res.status(204).json({
             promise: results
         }) 
-    // } catch (err) {
-    //     res.status(500)
-    // }
+    } catch (err) {
+        res.status(500)
+    }
     })
 
 const startExpressApp = () => {

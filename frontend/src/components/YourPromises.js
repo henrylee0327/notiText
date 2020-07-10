@@ -1,40 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PromiseContent from './promise-components/PromiseContent';
 import PromiseWhen from './promise-components/PromiseWhen';
 import PromiseWhere from './promise-components/PromiseWhere';
 import PhoneNumber from './promise-components/PhoneNumber';
 // import AddButton from './AddButton'
 import NextPage from './NextPage'
-
-// function PromiseForm (props) {
-
-//   const handleSubmit = async e => {
-//     e.preventDefault()
-    
-//     var promise = props.promise
-//     var date = props.date
-//     var time = props.time
-//     var place = props.place
-//     var phone = props.phone
-
-//     try {
-//       const body = { promise, date, time, place, phone }
-//       const response = await fetch("http://localhost:5000/promises", {
-//         method: "POST",
-//         headers: {"Content-Type": "application/json"},
-//         body: JSON.stringify(body)
-//       })
-//       console.log(response)
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
-//   return (
-//     <>
-  
-//   </> 
-//   )
-// }
+import promiseApp from '../apis/promiseApp'
+import { PromiseContext } from '../context/PromiseContext';
+import { useHistory } from "react-router-dom";
 
 
 function YourPromises (props) {
@@ -46,11 +19,30 @@ function YourPromises (props) {
   // const [submit, setSubmit] = useState(false)
   const [isValid, setIsValid] = useState(false)
   const [count, setCount] = useState(1)
+  const {addPromise} = useContext(PromiseContext)
+  
+  let history = useHistory();
 
-
- const handleSubmit = e => {
+ const handleSubmit = async (e) => {
    e.preventDefault()
-   setIsValid(true)
+   try {
+    const response = await promiseApp.post('/promises', {
+      id: "", 
+      uuid: "",
+      content: promise,
+      date: date,
+      time: time,
+      place: place,
+      phone_number: phone
+    })
+    addPromise(response.data.promise)
+    history.push('/promises')
+    console.log(response.data.promise[0])
+
+   } catch (err) {
+      console.log(err)
+   }
+  
  }
 
   return (
@@ -68,7 +60,7 @@ function YourPromises (props) {
     </div>
   </section>
   <br></br>
-      <form onSubmit={handleSubmit} action="">
+      <form onSubmit={handleSubmit} action="/promises">
     <section className="main-body">
       <div className="inputs">
       <br></br><br></br>
@@ -106,6 +98,37 @@ function YourPromises (props) {
 }
 
 export default YourPromises;
+
+// function PromiseForm (props) {
+
+//   const handleSubmit = async e => {
+//     e.preventDefault()
+    
+//     var promise = props.promise
+//     var date = props.date
+//     var time = props.time
+//     var place = props.place
+//     var phone = props.phone
+
+//     try {
+//       const body = { promise, date, time, place, phone }
+//       const response = await fetch("http://localhost:5000/promises", {
+//         method: "POST",
+//         headers: {"Content-Type": "application/json"},
+//         body: JSON.stringify(body)
+//       })
+//       console.log(response)
+//     } catch (err) {
+//       console.log(err)
+//     }
+//   }
+//   return (
+//     <>
+  
+//   </> 
+//   )
+// }
+
 
  // function phoneValidate () {
   //   if (props.phone === "") {

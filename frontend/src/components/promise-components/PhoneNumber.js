@@ -4,7 +4,7 @@ function PhoneNumber (props) {
 
     function handlePhone (e) {
         props.setPhone(e.currentTarget.value)
-        // console.log(e.currentTarget.value)
+        console.log(e.currentTarget.value)
     }
 
     return (

@@ -10,10 +10,10 @@ function App() {
   <>
     <PromiseContextProvider>
       <Router>
-          <switch> 
+          <Switch> 
           <Route exact path="/" component={YourPromises}/>
           <Route exact path="/promises" component={NextPage}/>
-          </switch>
+          </Switch>
       </Router>
     </PromiseContextProvider>
     
