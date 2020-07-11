@@ -59,12 +59,15 @@ function NextPage (props) {
       </div>
     </div>
   </section>
-  {/* <br></br> */}
     <section>
       {context && 
         context.map((el, index) => {
-          {/* console.log(el.uuid) */}
+
           function TheCard () {
+          
+            const theDate = el.date
+            console.log(theDate)
+            console.log('hhhhhhhhhhhhh')
             return (
               <>
               <div className="card">
@@ -78,7 +81,7 @@ function NextPage (props) {
                         {el.content}
                       </div>
                       <div className="content">
-                          {el.date} at {el.time}
+                          {theDate ? theDate.substring(0,10) : ""} at {el.time}
                       </div>
                       <div className="content">
                           {el.place}

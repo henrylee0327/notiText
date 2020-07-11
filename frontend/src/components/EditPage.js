@@ -1,28 +1,38 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import promiseApp from '../apis/promiseApp'
 import { PromiseContext } from '../context/PromiseContext';
 import { useParams } from 'react-router-dom';
-import PromiseContent from './promise-components/PromiseContent';
-import PromiseWhen from './promise-components/PromiseWhen';
-import PromiseWhere from './promise-components/PromiseWhere';
-import PhoneNumber from './promise-components/PhoneNumber';
 
 
 function EditPage (props) {
-  // const [card, setCard] = useState('')
+
   const {uuid} = useParams()
-  const {editPromise} = useContext(PromiseContext)
+  // const {context} = useContext(PromiseContext)
   const [promise, setPromise] = useState('')
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [place, setPlace] = useState('')
   const [phone, setPhone] = useState('')
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await promiseApp.get()
-  //   }
-  // })
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await promiseApp.get(`/promises/${uuid}`)
+      const thePromise = response.data.promise[0]
+      const shortDateString = thePromise.date.substring(0,10)
+
+      console.log(thePromise.date)
+      console.log('zzzzzzzzzzzz')
+      setPromise(thePromise.content)
+      setDate(shortDateString)
+      setTime(thePromise.time)
+      setPlace(thePromise.place)
+      setPhone(thePromise.phone_number)
+    }
+    fetchData()
+  }, [])
+
 
   return (
     <form>
@@ -32,22 +42,48 @@ function EditPage (props) {
       <div className="tile is-ancestor">
         <div className="tile is-parent">
           <article className="tile is-child box">
-            <PromiseContent promise={promise} setPromise={setPromise}/>
+          <p className="title">What was your promise?</p>
+          <div className="field">
+            <div className="control">
+                <textarea className="textarea is-primary" value={promise} onChange={(e) => setPromise(e.target.value)} placeholder="Enter your promises here"></textarea>
+            </div>
+        </div>
           </article>
         </div>
         <div className="tile is-parent">
           <article className="tile is-child box">
-            <PromiseWhen date={date} setDate={setDate} time={time} setTime={setTime}/>
+          <p className="title">Select date & time for your notification</p>
+          <div className="field">
+            <div className="control">
+                <input className="input is-info" value={date} onChange={(e) => setDate(e.target.value)} type="date" placeholder="Info input"></input>
+            </div>
+                <br></br>
+            <div className="control">
+                <input className="input is-info" value={time} onChange={(e) => setTime(e.target.value)} type="time" placeholder="Info input"></input>
+            </div>
+         </div>
           </article>
         </div>
       <div className="tile is-parent">
         <article className="tile is-child box">
-            <PromiseWhere place={place} setPlace={setPlace}/>
+        <p className="title">Where is it occuring?</p>
+        <div className="field">
+            <div className="control">
+                <textarea className="textarea is-warning" value={place} onChange={(e) => setPlace(e.target.value)} placeholder="Enter place here"></textarea>
+            </div>
+        </div>
         </article>
       </div>
       <div className="tile is-parent">
           <article className="tile is-child box">
-            <PhoneNumber phone={phone} setPhone={setPhone}/>
+          <p className="title">Enter your Phone number to receive a notification</p>
+          <div className="field">
+            <div className="control">
+                <input className="input is-danger" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter your phone number here"></input>
+                <br></br>
+                <p>(Format: 000-000-0000)</p>
+            </div>
+          </div>
           </article>
         </div>
     </div>
@@ -63,27 +99,3 @@ function EditPage (props) {
 
 export default EditPage;
 
-{/* <div className="card">
-<header className="card-header">
-  <p className="card-header-title">
-    No. 
-  </p>
-</header>
-<div className="card-content">
-    <div className="content">
-      
-    </div>
-    <div className="content">
-         at 
-    </div>
-    <div className="content">
-        
-    </div>
-    <div className="content">
-        
-    </div>
-</div>
-<footer className="card-footer">
-  <a className="card-footer-item">Save</a>
-</footer>
-</div> */}

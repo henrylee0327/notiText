@@ -40,18 +40,18 @@ app.get('/promises', async (req, res) => {
 })
 
 // Your promise
-// app.get('/promises/:uuid', async (req, res) => {
-//     console.log(req.params.uuid)
-//     try {
-//         const results = await db.getIndividualPromise(req.params.uuid)
-//         console.log(results)
-//         res.status(200).json({
-//         promise: results
-//     })
-//     } catch (err) {
-//         res.status(500)
-//     }
-// })
+app.get('/promises/:uuid', async (req, res) => {
+    console.log(req.params.uuid)
+    try {
+        const results = await db.getIndividualPromise(req.params.uuid)
+        console.log(results)
+        res.status(200).json({
+        promise: results
+    })
+    } catch (err) {
+        res.status(500)
+    }
+})
 
 
 // Create your promise

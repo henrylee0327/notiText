@@ -4,10 +4,11 @@ import PromiseWhen from './promise-components/PromiseWhen';
 import PromiseWhere from './promise-components/PromiseWhere';
 import PhoneNumber from './promise-components/PhoneNumber';
 // import AddButton from './AddButton'
-import NextPage from './NextPage'
+// import NextPage from './NextPage'
 import promiseApp from '../apis/promiseApp'
 import { PromiseContext } from '../context/PromiseContext';
 import { useHistory } from "react-router-dom";
+// import DatePicker from "react-datepicker"
 
 
 function YourPromises (props) {
@@ -20,6 +21,7 @@ function YourPromises (props) {
   const [isValid, setIsValid] = useState(false)
   const [count, setCount] = useState(1)
   const {addPromise} = useContext(PromiseContext)
+
   
   let history = useHistory();
 
@@ -42,7 +44,6 @@ function YourPromises (props) {
    } catch (err) {
       console.log(err)
    }
-  
  }
 
   return (

@@ -1,11 +1,17 @@
 import React from 'react'
 
-function PromiseWhen (props) {
 
+function PromiseWhen (props) {
+    
     function handleDate (e) {
-        // console.log(e)
-        props.setDate(e.currentTarget.value)
-        console.log(e.currentTarget.value)
+        const theValue = e.currentTarget.value
+        const shortDateString = theValue.substring(0,10)
+        
+        console.log(theValue)
+        console.log('zzzzzzzzzzzz')
+        
+        props.setDate(shortDateString)
+        
     }
 
     function handleTime (e) {
