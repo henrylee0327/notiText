@@ -3,6 +3,7 @@ const db = require('./lib/db');
 const app = express();
 const cors = require('cors')
 const port = 5000;
+const twilio = require('twilio')
 
 
 // Middleware
@@ -66,12 +67,21 @@ app.post('/promises', async (req, res) => {
         const thePhoneNumber = req.body.phone_number
 
         const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber)
-        console.log(results)
-        console.log('żzzzzzzzzzzzzzzzzz')
-        console.log('~~~~~~~~~~')
-    //     res.status(201).json({
-    //         promise: results
-    // })
+        
+        // Twilio API
+        var accountSid = 'AC9ba6b636a063ec97188ea3338f9db517'
+        var authToken = process.env.TWILIO_AUTH_TOKEN
+        var client = new twilio(accountSid, authToken)
+        
+        client.messages.create({
+                body: 'Your promise: ' + theContent +
+                ' Date: ' + theDate 
+                + ' Time: ' + theTime
+                + ' Place: ' + thePlace,
+                to: '+18324918070', 
+                from: '+12015818558'
+            }) 
+            .then((message) => console.log(message.sid));
         res.redirect(302, `/promises`)
     } catch (err) {
         res.status(500).send('Failed')
@@ -90,8 +100,21 @@ app.put('/promises/:uuid', async (req, res) => {
         const thePhoneNumber = req.body.phone_number
 
         const results = await db.updatePromise(theContent, theTime, theDate, thePlace, thePhoneNumber, theUUID)
-        console.log(results)
-        console.log('hhhhhhhhhhhhhhhhhhh')
+        
+        // Twilio API
+        var accountSid = 'AC9ba6b636a063ec97188ea3338f9db517'
+        var authToken = process.env.TWILIO_AUTH_TOKEN
+        var client = new twilio(accountSid, authToken)
+                
+        client.messages.create({
+        body: 'Your promise: ' + theContent +
+        ' Date: ' + theDate 
+        + ' Time: ' + theTime
+        + ' Place: ' + thePlace,
+        to: '+18324918070', 
+        from: '+12015818558'
+        }) 
+        .then((message) => console.log(message.sid));
         res.status(200).json({
             promise: results
         })
@@ -113,6 +136,9 @@ app.delete('/promises/:uuid', async (req, res) => {
         res.status(500)
     }
     })
+
+
+
 
 const startExpressApp = () => {
     app.listen(port, () => {
