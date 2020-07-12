@@ -3,12 +3,9 @@ import PromiseContent from './promise-components/PromiseContent';
 import PromiseWhen from './promise-components/PromiseWhen';
 import PromiseWhere from './promise-components/PromiseWhere';
 import PhoneNumber from './promise-components/PhoneNumber';
-// import AddButton from './AddButton'
-// import NextPage from './NextPage'
 import promiseApp from '../apis/promiseApp'
 import { PromiseContext } from '../context/PromiseContext';
 import { useHistory } from "react-router-dom";
-// import DatePicker from "react-datepicker"
 
 
 function YourPromises (props) {
@@ -17,9 +14,7 @@ function YourPromises (props) {
   const [time, setTime] = useState('')
   const [place, setPlace] = useState('')
   const [phone, setPhone] = useState('')
-  // const [submit, setSubmit] = useState(false)
-  const [isValid, setIsValid] = useState(false)
-  const [count, setCount] = useState(1)
+  
   const {addPromise} = useContext(PromiseContext)
 
   
@@ -39,10 +34,8 @@ function YourPromises (props) {
     })
     addPromise(response.data.promise)
     history.push('/promises')
-    console.log(response.data.promise[0])
-
    } catch (err) {
-      console.log(err)
+      alert("An error has occured")
    }
  }
 
@@ -100,35 +93,7 @@ function YourPromises (props) {
 
 export default YourPromises;
 
-// function PromiseForm (props) {
 
-//   const handleSubmit = async e => {
-//     e.preventDefault()
-    
-//     var promise = props.promise
-//     var date = props.date
-//     var time = props.time
-//     var place = props.place
-//     var phone = props.phone
-
-//     try {
-//       const body = { promise, date, time, place, phone }
-//       const response = await fetch("http://localhost:5000/promises", {
-//         method: "POST",
-//         headers: {"Content-Type": "application/json"},
-//         body: JSON.stringify(body)
-//       })
-//       console.log(response)
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
-//   return (
-//     <>
-  
-//   </> 
-//   )
-// }
 
 
  // function phoneValidate () {

@@ -6,14 +6,14 @@ import { useHistory } from "react-router-dom";
 
 function NextPage (props) {
     const {context, setContext} = useContext(PromiseContext)
+    
+
     useEffect(() => {
       const fetchData = async () => {
         try {
           const response = await promiseApp.get("/promises")
-          console.log(response)
           setContext(response.data.promise)
         } catch (err) {
-          console.log(err)
         }
       }
       fetchData()
@@ -22,13 +22,10 @@ function NextPage (props) {
     const handleDelete = async (uuid) => {
       try {
         const response = await promiseApp.delete(`/promises/${uuid}`)
-        console.log(response)
-        console.log('zzzzzzzzzzz')
         setContext(context.filter((el) => {
           return el.uuid !== uuid
         }))
       } catch (err) {
-        console.log(err)
       }
     }
 
@@ -37,8 +34,6 @@ function NextPage (props) {
     const handleEdit = async (uuid) => {
       try {
         const response = await promiseApp.put(`/promises/${uuid}`)
-        // console.log(response)
-        // console.log('~~~~~~~~~~~~~~~~~~')
         history.push(`/promises/${uuid}`)
       } catch (err) {
         alert(err)
@@ -62,18 +57,14 @@ function NextPage (props) {
     <section>
       {context && 
         context.map((el, index) => {
-
           function TheCard () {
-          
             const theDate = el.date
-            console.log(theDate)
-            console.log('hhhhhhhhhhhhh')
             return (
               <>
               <div className="card">
                   <header className="card-header">
                     <p className="card-header-title">
-                      No. {props.count}
+                      Your promise
                     </p>
                   </header>
                   <div className="card-content">
@@ -100,7 +91,7 @@ function NextPage (props) {
             )
           }
         return (
-         <TheCard key={index}/>
+         <TheCard key={index} count={props.count} />
         )
       })}
         
