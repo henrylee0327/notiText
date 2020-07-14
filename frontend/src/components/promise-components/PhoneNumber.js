@@ -9,12 +9,12 @@ function PhoneNumber (props) {
 
     return (
           <>
-          <p className="title">Enter your Phone number to receive a notification</p>
+          <p className="title">Enter a Phone number to send a text message</p>
           <div className="field">
             <div className="control">
-                <input className="input is-danger" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={props.phone} onChange={handlePhone} type="tel" placeholder="Enter your phone number here"></input>
+                <input className="input is-danger" pattern='^\+[1-9]\d{1,14}$' value={props.phone} onChange={handlePhone} type="tel" placeholder="Enter your phone number here"></input>
                 <br></br>
-                <p>(Format: 000-000-0000)</p>
+                <p>(Format: +10000000000)</p>
             </div>
           </div>
           </>
@@ -25,3 +25,4 @@ function PhoneNumber (props) {
 export default PhoneNumber;
 
 
+// "[0-9]{3}-[0-9]{3}-[0-9]{4}"

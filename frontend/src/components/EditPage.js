@@ -32,7 +32,7 @@ function EditPage (props) {
   }, [])
 
   let history = useHistory()
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const updatedPromise = await promiseApp.put(`/promises/${uuid}`, {
@@ -55,7 +55,7 @@ function EditPage (props) {
         <div className="tile is-ancestor">
           <div className="tile is-parent">
             <article className="tile is-child box">
-            <p className="title">What was your promise?</p>
+            <p className="title">What message do you want to send?</p>
             <div className="field">
               <div className="control">
                   <textarea className="textarea is-primary" value={promise} onChange={(e) => setPromise(e.target.value)} placeholder="Enter your promises here"></textarea>
@@ -65,7 +65,7 @@ function EditPage (props) {
           </div>
           <div className="tile is-parent">
             <article className="tile is-child box">
-            <p className="title">Select date & time for your notification</p>
+            <p className="title">Select date & time of occasion</p>
             <div className="field">
               <div className="control">
                   <input className="input is-info" value={date} onChange={(e) => setDate(e.target.value)} type="date" placeholder="Info input"></input>
@@ -89,7 +89,7 @@ function EditPage (props) {
         </div>
         <div className="tile is-parent">
             <article className="tile is-child box">
-            <p className="title">Enter your Phone number to receive a notification</p>
+            <p className="title">Enter a Phone number to send a text message</p>
             <div className="field">
               <div className="control">
                   <input className="input is-danger" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter your phone number here"></input>

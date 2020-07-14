@@ -21,7 +21,7 @@ function PromiseWhen (props) {
 
     return (
           <>
-          <p className="title">Select date & time for your notification</p>
+          <p className="title">Select date & time of occasion</p>
           <div className="field">
             <div className="control">
                 <input className="input is-info" value={props.date} onChange={handleDate} type="date" placeholder="Info input"></input>

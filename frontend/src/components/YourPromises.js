@@ -46,10 +46,10 @@ function YourPromises (props) {
     <div className="hero-body">
       <div className="container">
         <h1 className="title">
-          Promises
+          <b>NotiText</b>
         </h1>
         <h2 className="subtitle">
-          We will send you a text message so that you don't forget your promises &#128526;
+          Send a notification message to your friends and family so that they don't forget when and where you guys are meeting &#128526;
         </h2>
       </div>
     </div>

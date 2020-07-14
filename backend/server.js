@@ -68,25 +68,24 @@ app.post('/promises', async (req, res) => {
         const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber)
         
         // Twilio API
-        // var accountSid = 'AC9ba6b636a063ec97188ea3338f9db517'
-        // var authToken = process.env.TWILIO_AUTH_TOKEN
-        // var client = new twilio(accountSid, authToken)
-        
-        // client.messages.create({
-        //         body: 'Your promise: ' + theContent +
-        //         ' Date: ' + theDate 
-        //         + ' Time: ' + theTime
-        //         + ' Place: ' + thePlace,
-        //         to: '+18324918070', 
-        //         from: '+12015818558'
-        //     }) 
-        //     .then((message) => console.log(message.sid));
-
-        // res.redirect(302, `/promises`)
-        // } catch (err) {
-        // res.status(500).send('Failed')
-        // }
-        // })
+        var accountSid = 'AC9ba6b636a063ec97188ea3338f9db517'
+        var authToken = process.env.TWILIO_AUTH_TOKEN
+        var client = new twilio(accountSid, authToken)
+        console.log(thePhoneNumber)
+        client.messages.create({
+                body: 'Message: ' + theContent +
+                ' Date: ' + theDate 
+                + ' Time: ' + theTime
+                + ' Place: ' + thePlace,
+                to: thePhoneNumber, 
+                from: '+12015818558'
+            }) 
+            .then((message) => console.log(message.sid));
+        res.redirect(302, `/promises`)
+        } catch (err) {
+        res.status(500).send('Failed')
+        }
+        })
 
 // Update your promise
 app.put('/promises/:uuid', async (req, res) => {
@@ -107,11 +106,11 @@ app.put('/promises/:uuid', async (req, res) => {
         var client = new twilio(accountSid, authToken)
                 
         client.messages.create({
-        body: 'Your promise: ' + theContent +
+        body: 'Message: ' + theContent +
         ' Date: ' + theDate 
         + ' Time: ' + theTime
         + ' Place: ' + thePlace,
-        to: '+18324918070', 
+        to: thePhoneNumber, 
         from: '+12015818558'
         }) 
         .then((message) => console.log(message.sid));
