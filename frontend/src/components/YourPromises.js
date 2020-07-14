@@ -44,6 +44,7 @@ function YourPromises (props) {
     <>
   <section className="hero is-primary">
     <div className="hero-body">
+    
       <div className="container">
         <h1 className="title">
           <b>NotiText</b>

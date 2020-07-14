@@ -42,8 +42,11 @@ function NextPage (props) {
 
   return (
     <>
-    <section className="hero is-primary">
+  <section className="hero is-primary">
     <div className="hero-body">
+      <div className="buttons">
+        <button className="button is-link"><a href="/" style={{color:'#ffffff'}}>Home</a></button>
+      </div>
       <div className="container">
         <h1 className="title"> 
         <b>NotiText</b>
@@ -64,7 +67,7 @@ function NextPage (props) {
               <div className="card">
                   <header className="card-header">
                     <p className="card-header-title">
-                      Your promise
+                      Your text notification
                     </p>
                   </header>
                   <div className="card-content">

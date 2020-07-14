@@ -92,9 +92,9 @@ function EditPage (props) {
             <p className="title">Enter a Phone number to send a text message</p>
             <div className="field">
               <div className="control">
-                  <input className="input is-danger" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter your phone number here"></input>
+                  <input className="input is-danger" pattern='^\+[1-9]\d{1,14}$' value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter your phone number here"></input>
                   <br></br>
-                  <p>(Format: 000-000-0000)</p>
+                  <p>(Format: +10000000000)</p>
               </div>
             </div>
             </article>
@@ -103,7 +103,12 @@ function EditPage (props) {
         </div>
         <br></br><br></br>
         <div className="add-button">
-        <button type="submit" onClick={handleSubmit} className="button is-link is-rounded is-centered is-large" >Submit</button>
+          <div>
+            <button type="submit" onClick={handleSubmit} className="button is-link is-rounded is-centered is-large" >Submit</button>
+          </div>
+          <div>
+            <button className="button is-success is-rounded is-centered is-large" ><a href="/promises" style={{color:'#ffffff'}}>Go Back</a></button>
+          </div>
         </div>
     </section>
   </form>        
