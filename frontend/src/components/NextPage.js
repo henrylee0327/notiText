@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './NextPage.css'
 import promiseApp from '../apis/promiseApp'
 import { PromiseContext } from '../context/PromiseContext';
@@ -94,7 +94,7 @@ function NextPage (props) {
             )
           }
         return (
-         <TheCard key={index} count={props.count} />
+         <TheCard key={index}/>
         )
       })}
         

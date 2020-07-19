@@ -15,6 +15,7 @@ function YourPromises (props) {
   const [place, setPlace] = useState('')
   const [phone, setPhone] = useState('')
   
+  
   const {addPromise} = useContext(PromiseContext)
 
   
@@ -40,7 +41,6 @@ function YourPromises (props) {
       console.log('zzzzzzzz')
    }
  }
-
   return (
     <>
   <section className="hero is-primary">
@@ -94,42 +94,3 @@ function YourPromises (props) {
 }
 
 export default YourPromises;
-
-
-
-
- // function phoneValidate () {
-  //   if (props.phone === "") {
-  //     alert("Enter your phone number")
-  //     return false
-  //   } else if ((props.phone).length < 10 || (props.phone).length > 10){
-  //     alert("Enter 10 digits of phone number")
-  //     return false
-  //   } else if (isNaN(props.phone)) {
-  //     console.log(props.phone)
-  //     alert("Phone number has to be numbers")
-  //   } else {
-  //     return true
-  //   }
-  // }
-
-  // if (phoneValidate() === true) {
-    // console.log("Button clicked")
-    //   return props.setIsValid(true)
-    // } else {
-    //   return props.setIsValid(false)
-    // }
-    // props.setIsValid(true)
-   
-     // let arrayofNumbers = []
-  // for (let i = 1; i < count; i++) {
-  //   arrayofNumbers.push(count)
-  // }
-
-  // let thePromiseForm
-  // const theForm =<PromiseForm promise={promise} setPromise={setPromise} date={date} setDate={setDate} time={time} setTime={setTime} place={place} setPlace={setPlace} phone={phone} setPhone={setPhone} isValid={isValid} setIsValid={setIsValid}/>
-  // if (isValid === true) {
-  //   thePromiseForm = <NextPage count={count} promise={promise} date={date} time={time} place={place} phone={phone} isValid={isValid} />
-  // } else {
-  //   thePromiseForm = theForm
-  // }
