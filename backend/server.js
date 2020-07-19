@@ -4,13 +4,15 @@ const app = express();
 const cors = require('cors')
 const port = 5000;
 const twilio = require('twilio')
-const path = require('path')
+// const path = require('path')
+require('dotenv').config()
 
 // Middleware
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 app.use(cors()) 
-app.use(express.static(path.join(__dirname, "frontend/build")))
+// app.use(express.static(path.join(__dirname, "frontend/build")))
+app.use(express.static('../frontend/build'))
 
 function generateUUID () {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -56,7 +58,7 @@ app.get('/promises/:uuid', async (req, res) => {
 
 // Create your promise
 app.post('/promises', async (req, res) => {
-    // console.log(req.body.content)
+    console.log(req.body.content)
     try {
         const theUUID = generateUUID()
         const theContent = req.body.content
@@ -69,7 +71,8 @@ app.post('/promises', async (req, res) => {
         
         // Twilio API
         var accountSid = 'AC9ba6b636a063ec97188ea3338f9db517'
-        var authToken = process.env.TWILIO_AUTH_TOKEN
+        // var authToken = process.env.TWILIO_AUTH_TOKEN
+        var authToken = '7c9c099f89c42309f37f49ce4d4c4333'
         var client = new twilio(accountSid, authToken)
         console.log(thePhoneNumber)
         client.messages.create({

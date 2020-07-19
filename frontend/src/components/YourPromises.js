@@ -35,8 +35,9 @@ function YourPromises (props) {
     addPromise(response.data.promise)
     history.push('/promises')
    } catch (err) {
-      // alert("An error has occured")
+      alert("An error has occured")
       console.log(err)
+      console.log('zzzzzzzz')
    }
  }
 
