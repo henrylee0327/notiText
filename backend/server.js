@@ -70,9 +70,8 @@ app.post('/promises', async (req, res) => {
         const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber)
         
         // Twilio API
-        var accountSid = 'AC9ba6b636a063ec97188ea3338f9db517'
-        // var authToken = process.env.TWILIO_AUTH_TOKEN
-        var authToken = '7c9c099f89c42309f37f49ce4d4c4333'
+        var accountSid = process.env.TWILIO_ACCOUNT_SID
+        var authToken = process.env.TWILIO_AUTH_TOKEN
         var client = new twilio(accountSid, authToken)
         console.log(thePhoneNumber)
         client.messages.create({
@@ -104,7 +103,7 @@ app.put('/promises/:uuid', async (req, res) => {
         const results = await db.updatePromise(theContent, theTime, theDate, thePlace, thePhoneNumber, theUUID)
         
         // Twilio API
-        var accountSid = 'AC9ba6b636a063ec97188ea3338f9db517'
+        var accountSid = process.env.TWILIO_ACCOUNT_SID
         var authToken = process.env.TWILIO_AUTH_TOKEN
         var client = new twilio(accountSid, authToken)
                 
