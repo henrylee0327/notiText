@@ -65,12 +65,12 @@ function NextPage (props) {
             return (
               <>
               <div className="card">
-                  <header className="card-header">
-                    <p className="card-header-title">
+                  <header className="card-header has-background-primary-dark">
+                    <p className="card-header-title has-text-white">
                       Your text notification
                     </p>
                   </header>
-                  <div className="card-content">
+                  <div className="card-content has-background-primary-light has-text-primary-dark">
                       <div className="content">
                         {el.content}
                       </div>
@@ -85,8 +85,8 @@ function NextPage (props) {
                       </div>
                   </div>
                   <footer className="card-footer">
-                    <a className="card-footer-item" onClick={() => handleEdit(el.uuid)}>Edit</a>
-                    <a href="#" className="card-footer-item" onClick={() => handleDelete(el.uuid)}>Delete</a>
+                    <a className="card-footer-item has-background-warning-light has-text-link-dark" onClick={() => handleEdit(el.uuid)}>Edit</a>
+                    <a href="#" className="card-footer-item has-background-danger-light has-text-danger-dark" onClick={() => handleDelete(el.uuid)}>Delete</a>
                   </footer>
               </div>
               <br></br>
