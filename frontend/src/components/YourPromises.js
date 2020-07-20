@@ -42,6 +42,19 @@ function YourPromises (props) {
    }
  }
 
+ const updateNumbersInParent = (number) => {
+   console.log(number)
+   console.log('hhhhhhhhhh')
+  let value = number.map((element) => {
+    return element.newNumber
+  })
+  console.log(value)
+  for (let i = 0; i < value.length; i++) {
+    console.log(value[i])
+    setPhone(value[i])
+  }
+  }
+
   return (
     <>
   <section className="hero is-primary">
@@ -79,7 +92,7 @@ function YourPromises (props) {
       </div>
       <div className="tile is-parent">
           <article className="tile is-child box">
-            <PhoneNumber phone={phone} setPhone={setPhone} onChange={value => setPhone(value)}/>
+            <PhoneNumber phone={phone} setPhone={setPhone} onChange={value => setPhone(value)} updateNumbersInParent={updateNumbersInParent}/>
           </article>
         </div>
     </div>

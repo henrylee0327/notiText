@@ -14,11 +14,13 @@ function PhoneNumber (props) {
     const addPhoneNumber = (newNumber) => {
         const addNewPhoneNumber = [...phoneNumber, {newNumber}]
         setPhoneNumber(addNewPhoneNumber)
+        props.updateNumbersInParent(addNewPhoneNumber)
     }
 
-    const handleDelete = (number) => {
+    const deletePhoneNumber = (number) => {
         const filteredPhoneNumbers = phoneNumber.filter(currentPhoneNumbers => (currentPhoneNumbers !== number))
         setPhoneNumber(filteredPhoneNumbers)
+        props.updateNumbersInParent(filteredPhoneNumbers)
     }
 
     return (
@@ -36,7 +38,7 @@ function PhoneNumber (props) {
                         return (
                             <>
                             <li key={index}>{number.newNumber}</li>
-                            <button onClick={() => handleDelete(number)}>Delete</button>
+                            <button onClick={() => deletePhoneNumber(number)}>Delete</button>
                             </>
                         )
                     })}
