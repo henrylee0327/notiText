@@ -41,6 +41,7 @@ function YourPromises (props) {
       console.log('zzzzzzzz')
    }
  }
+
   return (
     <>
   <section className="hero is-primary">
@@ -78,7 +79,7 @@ function YourPromises (props) {
       </div>
       <div className="tile is-parent">
           <article className="tile is-child box">
-            <PhoneNumber phone={phone} setPhone={setPhone}/>
+            <PhoneNumber phone={phone} setPhone={setPhone} onChange={value => setPhone(value)}/>
           </article>
         </div>
     </div>
