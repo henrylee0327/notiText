@@ -3,7 +3,7 @@ const db = require('./lib/db');
 const app = express();
 const cors = require('cors')
 const port = 5000;
-const twilio = require('twilio')
+// const twilio = require('twilio')
 // const twilio = require('twilio')(
 //     process.env.TWILIO_ACCOUNT_SID,
 //     process.env.TWILIO_AUTH_TOKEN
@@ -80,7 +80,9 @@ app.post('/promises', async (req, res) => {
         // Twilio API
         var accountSid = process.env.TWILIO_ACCOUNT_SID
         var authToken = process.env.TWILIO_AUTH_TOKEN
-        var client = new twilio(accountSid, authToken)
+        var notifyServiceSid = process.env.NOTIFY_SERVICE_SID
+        // var client = new twilio(accountSid, authToken)
+        var client = require('twilio')(accountSid, authToken)
         // console.log(thePhoneNumber)
         // console.log('~~~~~~~~~~')
         // client.messages.create({
@@ -92,20 +94,16 @@ app.post('/promises', async (req, res) => {
         //         from: '+12015818558'
         //     }) 
         //     .then((message) => console.log(message.sid));
-        const numbers=[+18324918070, +18324913567]
-        Promise.all(
-            numbers.map(number => {
-              return client.messages.create({
-                to: number,
-                from: +12015818558,
-                body: 'Test'
-              });
+        client.notify.services(notifyServiceSid)
+            .notifications.create({
+                toBinding:JSON.stringify({
+                    binding_type: 'sms', address: '+18324918070',
+                    binding_type: 'sms', address: '+18324918070'
+                }),
+                body:'test'
             })
-          )
-            .then(messages => {
-              console.log('Messages sent!');
-            })
-            .catch(err => console.error(err));
+            .then(notification => console.log(notification.sid))
+            .catch(error => console.log(error))
         res.redirect(302, `/promises`)
         } catch (err) {
         res.status(500).send('Failed')
