@@ -7,14 +7,23 @@ function PhoneNumber (props) {
         console.log(e.currentTarget.value)
     }
 
+    function handleEmail (e) {
+        console.log(e.currentTarget.value)
+        props.setEmail(e.currentTarget.value)
+    }
+
     return (
           <>
-          <p className="title">Enter a Phone number to send a text message</p>
+          <p className="title">Enter a Phone number & email to send a notification</p>
           <div className="field">
             <div className="control">
-                <input className="input is-danger" pattern='^\+[1-9]\d{1,14}$' value={props.phone} onChange={handlePhone} type="tel" placeholder="Enter your phone number here"></input>
+                <input className="input is-danger" pattern='^\+[1-9]\d{1,14}$' value={props.phone} onChange={handlePhone} type="tel" placeholder="Enter phone number here"></input>
                 <br></br>
                 <p>(Format: +10000000000)</p>
+            </div>
+            <div className="control">
+                <input className="input is-danger" type='email' value={props.email} onChange={handleEmail} placeholder="Enter email here"></input>
+                <br></br>
             </div>
           </div>
           </>

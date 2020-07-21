@@ -5,6 +5,8 @@ const cors = require('cors')
 const port = 5000;
 const twilio = require('twilio')
 // const path = require('path')
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 require('dotenv').config()
 
 // Middleware
@@ -31,7 +33,7 @@ app.get('/promises', async (req, res) => {
     // console.log(req.params)
     try {
         const results = await db.getPromise()
-        console.log(results)
+        // console.log(results)
         res.status(200).json({
             promise: results
         })
@@ -43,10 +45,10 @@ app.get('/promises', async (req, res) => {
 
 // Your promise
 app.get('/promises/:uuid', async (req, res) => {
-    console.log(req.params.uuid)
+    // console.log(req.params.uuid)
     try {
         const results = await db.getIndividualPromise(req.params.uuid)
-        console.log(results)
+        // console.log(results)
         res.status(200).json({
         promise: results
     })
@@ -58,7 +60,7 @@ app.get('/promises/:uuid', async (req, res) => {
 
 // Create your promise
 app.post('/promises', async (req, res) => {
-    console.log(req.body.content)
+    // console.log(req.body.content)
     try {
         const theUUID = generateUUID()
         const theContent = req.body.content
@@ -66,23 +68,45 @@ app.post('/promises', async (req, res) => {
         const theDate = req.body.date
         const thePlace = req.body.place
         const thePhoneNumber = req.body.phone_number
+        const theEmail = req.body.email
 
-        const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber)
+        const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber, theEmail)
         
-        // Twilio API
+        // Twilio SMS API
         var accountSid = process.env.TWILIO_ACCOUNT_SID
         var authToken = process.env.TWILIO_AUTH_TOKEN
         var client = new twilio(accountSid, authToken)
-        console.log(thePhoneNumber)
+        // console.log(thePhoneNumber)
         client.messages.create({
-                body: 'Message: ' + theContent +
-                ' Date: ' + theDate 
-                + ' Time: ' + theTime
+                body: 'Message: ' + theContent + ' / ' +
+                ' Date: ' + theDate + ' / '
+                + ' Time: ' + theTime + ' / '
                 + ' Place: ' + thePlace,
                 to: thePhoneNumber, 
                 from: '+12015818558'
             }) 
             .then((message) => console.log(message.sid));
+        
+        // Twilio email API
+        const msg = {
+        to: theEmail,
+        from: 'djteski@gmail.com',
+        subject: "Message from Henry's notiText",
+        text: 'Message: ' + theContent + ' / ' +
+        ' Date: ' + theDate + ' / ' +
+        ' Time: ' + theTime + ' / ' +
+        ' Place: ' + thePlace + ' / '
+        // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        };
+        sgMail.send(msg)
+        .then(() => {}, error => {
+            console.error(error);
+        
+            if (error.response) {
+              console.error(error.response.body)
+            }
+          });
+
         res.redirect(302, `/promises`)
         } catch (err) {
         res.status(500).send('Failed')
@@ -91,7 +115,7 @@ app.post('/promises', async (req, res) => {
 
 // Update your promise
 app.put('/promises/:uuid', async (req, res) => {
-    console.log(req.params.uuid)
+    // console.log(req.params.uuid)
     try {
         const theUUID = req.params.uuid
         const theContent = req.body.content
@@ -99,16 +123,19 @@ app.put('/promises/:uuid', async (req, res) => {
         const theDate = req.body.date
         const thePlace = req.body.place
         const thePhoneNumber = req.body.phone_number
-
-        const results = await db.updatePromise(theContent, theTime, theDate, thePlace, thePhoneNumber, theUUID)
+        const theEmail = req.body.email
+        console.log(theEmail)
+        console.log('~~~~~~~~~~~~~~')
+        const results = await db.updatePromise(theContent, theTime, theDate, thePlace, thePhoneNumber, theUUID, theEmail)
         
-        // Twilio API
+        // Twilio SMS API
         var accountSid = process.env.TWILIO_ACCOUNT_SID
         var authToken = process.env.TWILIO_AUTH_TOKEN
         var client = new twilio(accountSid, authToken)
                 
         client.messages.create({
-        body: 'Message: ' + theContent +
+        body: 'This is an updated notification' + ' / ' +
+        'Message: ' + theContent +
         ' Date: ' + theDate 
         + ' Time: ' + theTime
         + ' Place: ' + thePlace,
@@ -116,6 +143,26 @@ app.put('/promises/:uuid', async (req, res) => {
         from: '+12015818558'
         }) 
         .then((message) => console.log(message.sid));
+        
+        // Twilio email API
+        const msg = {
+            to: theEmail,
+            from: 'djteski@gmail.com',
+            subject: "Message from Henry's notiText",
+            text: 'This is an updated notification' + ' / ' + 'Message: ' + theContent + ' / ' +
+            ' Date: ' + theDate + ' / ' +
+            ' Time: ' + theTime + ' / ' +
+            ' Place: ' + thePlace + ' / '
+            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            };
+            sgMail.send(msg)
+            .then(() => {}, error => {
+                console.error(error);
+            
+                if (error.response) {
+                  console.error(error.response.body)
+                }
+              });
         res.status(200).json({
             promise: results
         })
