@@ -4,23 +4,30 @@ import React, {useState} from 'react'
 function PhoneNumber (props) {
     // const [count, setCount] = useState(1)
     const [phoneNumber, setPhoneNumber] = useState([])
+    const [inputPhone, setInputPhone] = useState('')
+
+    const handleOnChange = (e) => {
+        console.log(e.target.value)
+        setInputPhone(e.target.value)
+    }
 
     const addNumberButton = (e) => {
         e.preventDefault()
-        addPhoneNumber(props.phone)
-        props.setPhone('')
+        addPhoneNumberFn(inputPhone)
+        console.log(inputPhone)
+        setInputPhone('')
       }
 
-    const addPhoneNumber = (newNumber) => {
+    const addPhoneNumberFn = (newNumber) => {
         const addNewPhoneNumber = [...phoneNumber, {newNumber}]
         setPhoneNumber(addNewPhoneNumber)
-        props.updateNumbersInParent(addNewPhoneNumber)
+        props.setPhone(addNewPhoneNumber)
     }
 
     const deletePhoneNumber = (number) => {
         const filteredPhoneNumbers = phoneNumber.filter(currentPhoneNumbers => (currentPhoneNumbers !== number))
         setPhoneNumber(filteredPhoneNumbers)
-        props.updateNumbersInParent(filteredPhoneNumbers)
+        props.setPhone(filteredPhoneNumbers)
     }
 
     return (
@@ -30,7 +37,7 @@ function PhoneNumber (props) {
             <div className="control">
                 <button className="button is-primary" onClick={addNumberButton}>Add</button>
                 <p><b>No. of phone numbers:</b></p>
-                <input className="input is-danger" pattern='^\+[1-9]\d{1,14}$' value={props.phone} onChange={e => props.onChange(e.target.value)} type="tel" placeholder="Enter your phone number here"></input>
+                <input className="input is-danger" pattern='^\+[1-9]\d{1,14}$' value={inputPhone} onChange={handleOnChange} type="tel" placeholder="Enter your phone number here"></input>
                 <p>(Format: +10000000000)</p>
             </div>
                 <ul>

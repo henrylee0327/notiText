@@ -24,6 +24,8 @@ function YourPromises (props) {
  const handleSubmit = async (e) => {
    e.preventDefault()
    try {
+     console.log(phone)
+     console.log("This is the phone")
     const response = await promiseApp.post('/promises', {
       id: "", 
       uuid: "",
@@ -42,18 +44,17 @@ function YourPromises (props) {
    }
  }
 
- const updateNumbersInParent = (number) => {
-   console.log(number)
-   console.log('hhhhhhhhhh')
-  let value = number.map((element) => {
-    return element.newNumber
-  })
-  console.log(value)
-  for (let i = 0; i < value.length; i++) {
-    console.log(value[i])
-    setPhone(value[i])
-  }
-  }
+//  const updateNumbersInParent = (number) => {
+//    console.log(number)
+//    console.log('hhhhhhhhhh')
+//   let value = number.map((element) => element.newNumber)
+//   // console.log(value)
+//   // for (let i = 0; i < value.length; i++) {
+//   //   console.log(value[i])
+//     console.log(value)
+//     setPhone(value)
+//   }
+  
 
   return (
     <>
@@ -92,7 +93,7 @@ function YourPromises (props) {
       </div>
       <div className="tile is-parent">
           <article className="tile is-child box">
-            <PhoneNumber phone={phone} setPhone={setPhone} onChange={value => setPhone(value)} updateNumbersInParent={updateNumbersInParent}/>
+            <PhoneNumber phone={phone} setPhone={setPhone} />
           </article>
         </div>
     </div>

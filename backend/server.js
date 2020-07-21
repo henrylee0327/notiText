@@ -4,6 +4,10 @@ const app = express();
 const cors = require('cors')
 const port = 5000;
 const twilio = require('twilio')
+// const twilio = require('twilio')(
+//     process.env.TWILIO_ACCOUNT_SID,
+//     process.env.TWILIO_AUTH_TOKEN
+//   );
 // const path = require('path')
 require('dotenv').config()
 
@@ -43,13 +47,14 @@ app.get('/promises', async (req, res) => {
 
 // Your promise
 app.get('/promises/:uuid', async (req, res) => {
-    console.log(req.params.uuid)
+    // console.log(req.params.uuid)
     try {
         const results = await db.getIndividualPromise(req.params.uuid)
-        console.log(results)
-        res.status(200).json({
-        promise: results
-    })
+        // console.log(results)
+    //     res.status(200).json({
+    //     promise: results
+    // })
+    res.redirect(302, `/promises`)
     } catch (err) {
         res.status(500)
     }
@@ -58,7 +63,7 @@ app.get('/promises/:uuid', async (req, res) => {
 
 // Create your promise
 app.post('/promises', async (req, res) => {
-    console.log(req.body.content)
+    // console.log(req.body.content)
     try {
         const theUUID = generateUUID()
         const theContent = req.body.content
@@ -66,28 +71,47 @@ app.post('/promises', async (req, res) => {
         const theDate = req.body.date
         const thePlace = req.body.place
         const thePhoneNumber = req.body.phone_number
-
-        const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber)
+        const parsedPhoneNumber = thePhoneNumber.map(number => {
+            return number.newNumber
+        })
+        console.log(parsedPhoneNumber)
+        const results = await db.createPromise(theUUID, theContent, theTime, theDate, thePlace, parsedPhoneNumber)
         
         // Twilio API
         var accountSid = process.env.TWILIO_ACCOUNT_SID
         var authToken = process.env.TWILIO_AUTH_TOKEN
         var client = new twilio(accountSid, authToken)
-        console.log(thePhoneNumber)
-        client.messages.create({
-                body: 'Message: ' + theContent +
-                ' Date: ' + theDate 
-                + ' Time: ' + theTime
-                + ' Place: ' + thePlace,
-                to: thePhoneNumber, 
-                from: '+12015818558'
-            }) 
-            .then((message) => console.log(message.sid));
+        // console.log(thePhoneNumber)
+        // console.log('~~~~~~~~~~')
+        // client.messages.create({
+        //         body: 'Message: ' + theContent +
+        //         ' Date: ' + theDate 
+        //         + ' Time: ' + theTime
+        //         + ' Place: ' + thePlace,
+        //         to: parsedPhoneNumber, 
+        //         from: '+12015818558'
+        //     }) 
+        //     .then((message) => console.log(message.sid));
+        const numbers=[+18324918070, +18324913567]
+        Promise.all(
+            numbers.map(number => {
+              return client.messages.create({
+                to: number,
+                from: +12015818558,
+                body: 'Test'
+              });
+            })
+          )
+            .then(messages => {
+              console.log('Messages sent!');
+            })
+            .catch(err => console.error(err));
         res.redirect(302, `/promises`)
         } catch (err) {
         res.status(500).send('Failed')
         }
         })
+      
 
 // Update your promise
 app.put('/promises/:uuid', async (req, res) => {

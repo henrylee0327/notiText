@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import promiseApp from '../apis/promiseApp'
-import { PromiseContext } from '../context/PromiseContext';
+// import { PromiseContext } from '../context/PromiseContext';
 import { useParams, useHistory } from 'react-router-dom';
 
 
