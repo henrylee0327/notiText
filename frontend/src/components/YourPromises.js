@@ -14,6 +14,7 @@ function YourPromises (props) {
   const [time, setTime] = useState('')
   const [place, setPlace] = useState('')
   const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   
   const {addPromise} = useContext(PromiseContext)
 
@@ -30,7 +31,8 @@ function YourPromises (props) {
       date: date,
       time: time,
       place: place,
-      phone_number: phone
+      phone_number: phone,
+      email: email
     })
     addPromise(response.data.promise)
     history.push('/promises')
@@ -78,7 +80,7 @@ function YourPromises (props) {
       </div>
       <div className="tile is-parent">
           <article className="tile is-child box">
-            <PhoneNumber phone={phone} setPhone={setPhone}/>
+            <PhoneNumber phone={phone} setPhone={setPhone} email={email} setEmail={setEmail} />
           </article>
         </div>
     </div>

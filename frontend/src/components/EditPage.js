@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import promiseApp from '../apis/promiseApp'
-import { PromiseContext } from '../context/PromiseContext';
+// import { PromiseContext } from '../context/PromiseContext';
 import { useParams, useHistory } from 'react-router-dom';
 
 
@@ -13,6 +13,8 @@ function EditPage (props) {
   const [time, setTime] = useState('')
   const [place, setPlace] = useState('')
   const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  // const {context, setContext} = useContext(PromiseContext)
   
 
 
@@ -21,12 +23,13 @@ function EditPage (props) {
       const response = await promiseApp.get(`/promises/${uuid}`)
       const thePromise = response.data.promise[0]
       const shortDateString = thePromise.date.substring(0,10)
-
+      // console.log(thePromise)
       setPromise(thePromise.content)
       setDate(shortDateString)
       setTime(thePromise.time)
       setPlace(thePromise.place)
       setPhone(thePromise.phone_number)
+      setEmail(thePromise.email)
     }
     fetchData()
   }, [])
@@ -35,14 +38,17 @@ function EditPage (props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const updatedPromise = await promiseApp.put(`/promises/${uuid}`, {
-      // id: "", 
-      // uuid: "",
+    console.log(email)
+    console.log('this is an email')
+    const response = await promiseApp.put(`/promises/${uuid}`, {
+      id: "", 
+      uuid: "",
       content: promise,
       date: date,
       time: time,
       place: place,
-      phone_number: phone
+      phone_number: phone,
+      email: email
     })
     history.push('/promises')
   }
@@ -96,6 +102,10 @@ function EditPage (props) {
                   <br></br>
                   <p>(Format: +10000000000)</p>
               </div>
+              <div className="control">
+                <input className="input is-danger" type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email here"></input>
+                <br></br>
+            </div>
             </div>
             </article>
           </div>

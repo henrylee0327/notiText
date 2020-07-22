@@ -83,6 +83,9 @@ function NextPage (props) {
                       <div className="content">
                           {el.phone_number}
                       </div>
+                      <div className="content">
+                          {el.email}
+                      </div>
                   </div>
                   <footer className="card-footer">
                     <a className="card-footer-item has-background-warning-light has-text-link-dark" onClick={() => handleEdit(el.uuid)}>Edit</a>

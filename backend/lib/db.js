@@ -46,13 +46,13 @@ function getIndividualPromise (uuid) {
 
 // Create a new promise query
 const createPromiseQuery = 
-`INSERT INTO promise (uuid, content, time, date, place, phone_number, ctime, mtime) 
-VALUES (?, ?, ?, ?, ?, ?, current_timestamp, current_timestamp)
+`INSERT INTO promise (uuid, content, time, date, place, phone_number, email, ctime, mtime) 
+VALUES (?, ?, ?, ?, ?, ?, ?, current_timestamp, current_timestamp)
 RETURNING *
 `
 
-function createPromise (uuid, content, time, date, place, phone_number) {
-    return conn.raw(createPromiseQuery, [uuid, content, time, date, place, phone_number])
+function createPromise (uuid, content, time, date, place, phone_number, email) {
+    return conn.raw(createPromiseQuery, [uuid, content, time, date, place, phone_number, email])
         .then((result) => {
             return result.rows
         })
@@ -60,14 +60,15 @@ function createPromise (uuid, content, time, date, place, phone_number) {
 
 // Update a promise query
 const updatePromiseQuery = 
-`UPDATE promise SET content = ?, time = ?, date = ?, place = ?, phone_number = ?, ctime = current_timestamp, mtime = current_timestamp 
+`UPDATE promise SET content = ?, time = ?, date = ?, place = ?, phone_number = ?, email = ?, ctime = current_timestamp, mtime = current_timestamp  
 WHERE uuid = ? 
 RETURNING *;
 `
 
-function updatePromise (content, time, date, place, phone_number, uuid) {
-    return conn.raw(updatePromiseQuery, [content, time, date, place, phone_number, uuid])
+function updatePromise (uuid, content, time, date, place, phone_number, email) {
+    return conn.raw(updatePromiseQuery, [content, time, date, place, phone_number, email, uuid])
         .then((result) => {
+            console.log(result)
             return result.rows
         })
 }
