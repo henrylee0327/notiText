@@ -40,9 +40,9 @@ function EditPage (props) {
     e.preventDefault()
     console.log(email)
     console.log('this is an email')
-    const updatedPromise = await promiseApp.put(`/promises/${uuid}`, {
-      // id: "", 
-      // uuid: "",
+    const response = await promiseApp.put(`/promises/${uuid}`, {
+      id: "", 
+      uuid: "",
       content: promise,
       date: date,
       time: time,

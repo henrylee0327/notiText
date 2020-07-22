@@ -37,10 +37,10 @@ app.get('/promises', async (req, res) => {
         res.status(200).json({
             promise: results
         })
+        // res.status(200)
     } catch (err) {
         res.status(500)
     }
-        
 })
 
 // Your promise
@@ -76,7 +76,7 @@ app.post('/promises', async (req, res) => {
         var accountSid = process.env.TWILIO_ACCOUNT_SID
         var authToken = process.env.TWILIO_AUTH_TOKEN
         var client = new twilio(accountSid, authToken)
-        // console.log(thePhoneNumber)
+        
         client.messages.create({
                 body: 'Message: ' + theContent + ' / ' +
                 ' Date: ' + theDate + ' / '
@@ -124,15 +124,21 @@ app.put('/promises/:uuid', async (req, res) => {
         const thePlace = req.body.place
         const thePhoneNumber = req.body.phone_number
         const theEmail = req.body.email
+        console.log(theUUID)
+        console.log(theContent)
+        console.log(theTime)
+        console.log(theDate)
+        console.log(thePlace)
+        console.log(thePhoneNumber)
         console.log(theEmail)
-        console.log('~~~~~~~~~~~~~~')
-        const results = await db.updatePromise(theContent, theTime, theDate, thePlace, thePhoneNumber, theUUID, theEmail)
+        
+        const results = await db.updatePromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber, theEmail)
+        
         
         // Twilio SMS API
         var accountSid = process.env.TWILIO_ACCOUNT_SID
         var authToken = process.env.TWILIO_AUTH_TOKEN
         var client = new twilio(accountSid, authToken)
-                
         client.messages.create({
         body: 'This is an updated notification' + ' / ' +
         'Message: ' + theContent +

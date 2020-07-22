@@ -60,14 +60,15 @@ function createPromise (uuid, content, time, date, place, phone_number, email) {
 
 // Update a promise query
 const updatePromiseQuery = 
-`UPDATE promise SET uuid = ?, content = ?, time = ?, date = ?, place = ?, phone_number = ?, ctime = current_timestamp, mtime = current_timestamp, email = ? 
+`UPDATE promise SET content = ?, time = ?, date = ?, place = ?, phone_number = ?, email = ?, ctime = current_timestamp, mtime = current_timestamp  
 WHERE uuid = ? 
 RETURNING *;
 `
 
 function updatePromise (uuid, content, time, date, place, phone_number, email) {
-    return conn.raw(updatePromiseQuery, [uuid, content, time, date, place, phone_number, email])
+    return conn.raw(updatePromiseQuery, [content, time, date, place, phone_number, email, uuid])
         .then((result) => {
+            console.log(result)
             return result.rows
         })
 }
