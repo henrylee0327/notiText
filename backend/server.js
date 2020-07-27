@@ -4,7 +4,6 @@ const app = express();
 const cors = require('cors')
 const port = 5000;
 const twilio = require('twilio')
-// const path = require('path')
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 require('dotenv').config()
@@ -13,7 +12,6 @@ require('dotenv').config()
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 app.use(cors()) 
-// app.use(express.static(path.join(__dirname, "frontend/build")))
 app.use(express.static('../frontend/build'))
 
 function generateUUID () {
@@ -37,7 +35,6 @@ app.get('/promises', async (req, res) => {
         res.status(200).json({
             promise: results
         })
-        // res.status(200)
     } catch (err) {
         res.status(500)
     }
@@ -104,6 +101,7 @@ app.post('/promises', async (req, res) => {
         
             if (error.response) {
               console.error(error.response.body)
+              console.log('zzzzzzzzzzzzz')
             }
           });
 
@@ -124,13 +122,6 @@ app.put('/promises/:uuid', async (req, res) => {
         const thePlace = req.body.place
         const thePhoneNumber = req.body.phone_number
         const theEmail = req.body.email
-        console.log(theUUID)
-        console.log(theContent)
-        console.log(theTime)
-        console.log(theDate)
-        console.log(thePlace)
-        console.log(thePhoneNumber)
-        console.log(theEmail)
         
         const results = await db.updatePromise(theUUID, theContent, theTime, theDate, thePlace, thePhoneNumber, theEmail)
         
@@ -159,7 +150,6 @@ app.put('/promises/:uuid', async (req, res) => {
             ' Date: ' + theDate + ' / ' +
             ' Time: ' + theTime + ' / ' +
             ' Place: ' + thePlace + ' / '
-            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
             };
             sgMail.send(msg)
             .then(() => {}, error => {

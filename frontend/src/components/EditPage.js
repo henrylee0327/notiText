@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import promiseApp from '../apis/promiseApp'
-// import { PromiseContext } from '../context/PromiseContext';
 import { useParams, useHistory } from 'react-router-dom';
 
 
@@ -14,7 +13,6 @@ function EditPage (props) {
   const [place, setPlace] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
-  // const {context, setContext} = useContext(PromiseContext)
   
 
 
@@ -39,7 +37,7 @@ function EditPage (props) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(email)
-    console.log('this is an email')
+    console.log('~~~~~~~~~~~~~')
     const response = await promiseApp.put(`/promises/${uuid}`, {
       id: "", 
       uuid: "",
@@ -50,7 +48,7 @@ function EditPage (props) {
       phone_number: phone,
       email: email
     })
-    history.push('/promises')
+    history.push(`/promises`)
   }
 
   return (
@@ -98,11 +96,13 @@ function EditPage (props) {
             <p className="title">Enter a Phone number to send a text message</p>
             <div className="field">
               <div className="control">
+                  <p>Phone number</p>
                   <input className="input is-danger" pattern='^\+[1-9]\d{1,14}$' value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter your phone number here"></input>
                   <br></br>
                   <p>(Format: +10000000000)</p>
               </div>
               <div className="control">
+                <p>email</p>
                 <input className="input is-danger" type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email here"></input>
                 <br></br>
             </div>
