@@ -4,7 +4,6 @@ function PromiseContent (props) {
     // console.log(props)
 
     function handleChange (e) {
-        // e.preventDefault()
         console.log(e.currentTarget.value)
         props.setPromise(e.currentTarget.value)
     }
