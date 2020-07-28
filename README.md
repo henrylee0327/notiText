@@ -3,6 +3,21 @@
 ## About
 notiText is a web application that you can send a SMS and an email as a reminder of you and someone else's commitment.
 
+Frontend Technologies
+```
+ReactJS
+Bulma
+```
+
+Backend Technologies
+```
+nodeJS
+expressJS
+KnexJS
+Postgresql
+```
+
+<h>
 
 ### Home Page
 You can type your message, select date & time, type the place of where your commitment is occuring, and as a last your phone number and email address.
@@ -44,16 +59,4 @@ Updated notification will be sent via SMS and email stating:
 ![](pictures/email-notification-2.png)
 
 
-Frontend Technologies
-```
-ReactJS
-Bulma
-```
 
-Backend Technologies
-```
-nodeJS
-expressJS
-KnexJS
-Postgresql
-```
