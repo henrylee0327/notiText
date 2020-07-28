@@ -41,7 +41,7 @@ All of your notifications are stored in Postgresql DB and are fetched in this pa
 
 ## Edit Page
 You can edit the contents of your notification and send it a recipient again. 
-![](pictures/EditPage.ong)
+![](pictures/EditPage.png)
 
 <br>
 
