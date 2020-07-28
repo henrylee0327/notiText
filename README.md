@@ -33,7 +33,7 @@ Once you click Submit button, the message will be sent to the reicipient via SMS
 #### Email
 ![](pictures/email-notification-1.png)
 
-
+<br>
 ## Your notifications page
 All of your notifications are stored in Postgresql DB and are fetched in this page. You can also _edit_and_delete_the notification
 ![](pictures/ListPage.png)
@@ -42,7 +42,7 @@ All of your notifications are stored in Postgresql DB and are fetched in this pa
 You can edit the contents of your notification and send it a recipient again. 
 ![](pictures/EditPage.ong)
 
-
+<br>
 ## Updated Notification
 Updated notification will be sent via SMS and email stating:
 
